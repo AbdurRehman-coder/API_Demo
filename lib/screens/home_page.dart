@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:crypto_api/models/albums.dart';
 import 'package:crypto_api/models/crypto_model.dart';
 import 'package:crypto_api/services/api_services.dart';
+import 'package:crypto_api/widgets/coin_card.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -30,6 +31,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(11, 12, 54, 5),
       appBar: AppBar(
         title: Text('REST API\'s'),
       ),
@@ -42,7 +44,14 @@ class _HomePageState extends State<HomePage> {
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                return
+              return CoinCard(
+                name: snapshot.data![index].name,
+                symbol: snapshot.data![index].symbol,
+                imageUrl: snapshot.data![index].image,
+                currentPrices: snapshot.data![index].currentPrice,
+                priceChange: snapshot.data![index].priceChange24h,
+                changePercent: snapshot.data![index].priceChangePercentage24h,
+              );
               },
             );
           } else if (snapshot.hasError) {
