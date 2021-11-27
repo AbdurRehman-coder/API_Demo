@@ -34,13 +34,13 @@ class Crypto {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['symbol'] = this.symbol;
-    data['name'] = this.name;
-    data['image'] = this.image;
-    data['current_price'] = this.currentPrice;
-    data['price_change_24h'] = this.priceChange24h;
-    data['price_change_percentage_24h'] = this.priceChangePercentage24h;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['symbol'] = symbol;
+    data['name'] = name;
+    data['image'] = image;
+    data['current_price'] = currentPrice;
+    data['price_change_24h'] = priceChange24h;
+    data['price_change_percentage_24h'] = priceChangePercentage24h;
     return data;
   }
 }

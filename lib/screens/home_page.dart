@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:crypto_api/models/albums.dart';
@@ -25,7 +26,14 @@ class _HomePageState extends State<HomePage> {
     //albums = API_Manager().getAlbums();
     super.initState();
     // listAlbums = API_Manager.getApi();
-    cryptoMap = API_Manager.getApi();
+     cryptoMap = API_Manager.getApi();
+
+    Timer.periodic(const Duration(seconds: 5), (timer)
+        {
+        setState(() {
+          cryptoMap = API_Manager.getApi();
+        });
+        });
   }
 
   @override
@@ -33,7 +41,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(11, 12, 54, 5),
       appBar: AppBar(
-        title: Text('REST API\'s'),
+        title: Text('Crypto Coin',
+        style: TextStyle(
+          color: Colors.white70
+        ),),
+        centerTitle: true,
       ),
       body: FutureBuilder<List<Crypto>?>(
         //initialData: listAlbums,
@@ -48,9 +60,9 @@ class _HomePageState extends State<HomePage> {
                 name: snapshot.data![index].name,
                 symbol: snapshot.data![index].symbol,
                 imageUrl: snapshot.data![index].image,
-                currentPrices: snapshot.data![index].currentPrice,
-                priceChange: snapshot.data![index].priceChange24h,
-                changePercent: snapshot.data![index].priceChangePercentage24h,
+                currentPrices: snapshot.data![index].currentPrice!.toDouble(),
+                priceChange: snapshot.data![index].priceChange24h!.toDouble(),
+                changePercent: snapshot.data![index].priceChangePercentage24h!.toDouble(),
               );
               },
             );
