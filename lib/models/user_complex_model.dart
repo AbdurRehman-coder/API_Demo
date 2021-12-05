@@ -2,9 +2,9 @@
 import 'dart:convert';
 
 
-Map<String, UserModel> cryptoFromJson(String str) => Map.from(json.decode(str)).map((k, v) => MapEntry<String, UserModel>(k, UserModel.fromJson(v)));
+Map<String, UserModel> userFromJson(String str) => Map.from(json.decode(str)).map((k, v) => MapEntry<String, UserModel>(k, UserModel.fromJson(v)));
 
-String cryptoToJson(Map<String, UserModel> data) => json.encode(Map.from(data).map((k, v) => MapEntry<String, dynamic>(k, v.toJson())));
+String userToJson(Map<String, UserModel> data) => json.encode(Map.from(data).map((k, v) => MapEntry<String, dynamic>(k, v.toJson())));
 
 class UserModel {
   int? id;
