@@ -1,5 +1,6 @@
 import 'package:crypto_api/screens/api_demo_screen.dart';
 import 'package:crypto_api/screens/home_page.dart';
+import 'package:crypto_api/screens/product_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: APIDemoScreen(),
+      home: ProductScreen(),
     );
   }
 }

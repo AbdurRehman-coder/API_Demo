@@ -26,7 +26,7 @@ class _APIDemoScreenState extends State<APIDemoScreen> {
         jsonList.add(UserModel.fromJson(e));
       }).toList();
       print('jsonList values: $jsonList}');
-      return jsonList;
+      // return jsonList;
 
       // return jsonList.add(User.fromJson(data));
 
@@ -37,7 +37,13 @@ class _APIDemoScreenState extends State<APIDemoScreen> {
     }
     return jsonList;
   }
-
+  Future<List<UserModel>>? future;
+ @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    future = getApi();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +54,7 @@ class _APIDemoScreenState extends State<APIDemoScreen> {
         children: [
           Expanded(
             child: FutureBuilder<List<UserModel>>(
-              future: getApi(),
+              future: future,
               builder: (context, AsyncSnapshot<List<UserModel>> snapshot) {
                 // var values = snapshot.data!.map((e) => e).toList();
                 print('snapshot type: ${snapshot.data.runtimeType.toString()}');
@@ -57,13 +63,18 @@ class _APIDemoScreenState extends State<APIDemoScreen> {
                 } else {
                   print('jsonList values... $jsonList');
                   print('snapshot values: ${snapshot.data!.first.email}');
-                  return ListView.builder(
+                  return ListView.separated(
                     itemCount: snapshot.data!.length,
+
+                    separatorBuilder: (context, index) {
+                      return Divider(color: Colors.white,
+                      thickness: 10.0,);
+                    },
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
-                          title: Text(snapshot.data![index].email.toString()),
+                          title: Text(snapshot.data![index].address!.geo!.lat.toString()),
                           // subtitle: Text(snapshot.data![index].id.toString()),
                           tileColor: Colors.white,
                         ),
@@ -78,12 +89,4 @@ class _APIDemoScreenState extends State<APIDemoScreen> {
       ),
     );
   }
-}
-
-class Comments {
-  String? name;
-  String? email;
-  int? id;
-
-  Comments({this.id, this.name, this.email});
 }
